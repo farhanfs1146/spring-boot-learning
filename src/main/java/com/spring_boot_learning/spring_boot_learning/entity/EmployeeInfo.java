@@ -1,0 +1,29 @@
+package com.spring_boot_learning.spring_boot_learning.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class EmployeeInfo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "employee_name", nullable = false, length = 150)
+    private String employeeName;
+
+    @Column(name = "father_name", nullable = false, length = 150)
+    private String fatherName;
+
+    @Column(name = "contact_no", nullable = false, length = 15)
+    private String contactNo;
+}
