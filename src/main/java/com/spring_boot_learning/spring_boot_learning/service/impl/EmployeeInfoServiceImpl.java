@@ -51,6 +51,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
     @Override
     public List<EmployeeInfoResponse> findAll() {
+
         return employeeInfoRepository.findAll().stream().map(this::mapResponse).toList();
     }
 
