@@ -1,4 +1,4 @@
-package com.spring_boot_learning.spring_boot_learning.exceptionshandling;
+package com.spring_boot_learning.spring_boot_learning.exceptionsHandling;
 
 import com.spring_boot_learning.spring_boot_learning.APIResponse.APIResponse;
 import lombok.extern.slf4j.Slf4j;
