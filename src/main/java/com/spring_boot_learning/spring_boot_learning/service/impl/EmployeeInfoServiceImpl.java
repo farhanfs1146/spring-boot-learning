@@ -45,12 +45,13 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
     @Override
     public EmployeeInfoResponse getEmployeeById(Long id) {
-        return null;
+        var existingEmployee = employeeInfoRepository.findById(id).orElseThrow(()-> new RuntimeException("Employee with Id" + id + " not found"));
+        return mapResponse(existingEmployee);
     }
 
     @Override
     public List<EmployeeInfoResponse> findAll() {
-        return List.of();
+        return employeeInfoRepository.findAll().stream().map(this::mapResponse).toList();
     }
 
     @Override
