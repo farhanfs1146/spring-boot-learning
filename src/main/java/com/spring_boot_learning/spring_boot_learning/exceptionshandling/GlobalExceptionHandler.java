@@ -1,0 +1,55 @@
+package com.spring_boot_learning.spring_boot_learning.exceptionshandling;
+
+import com.spring_boot_learning.spring_boot_learning.APIResponse.APIResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Slf4j
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    // ✅ Validation Errors (DTO validation)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<APIResponse<Map<String, String>>> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+
+        log.warn("Validation error: {}", errors);
+
+        return ResponseEntity.badRequest()
+                .body(APIResponse.error("Validation failed", errors));
+    }
+
+    // ✅ Runtime Exceptions (business logic)
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<APIResponse<Void>> handleRuntimeException(RuntimeException ex) {
+        log.error("Runtime error: {}", ex.getMessage(), ex);
+
+        return ResponseEntity.badRequest()
+                .body(APIResponse.error(ex.getMessage()));
+    }
+
+    // ✅ Fallback for all other exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<APIResponse<Void>> handleGenericException(Exception ex) {
+        log.error("Unexpected error: {}", ex.getMessage(), ex);
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(APIResponse.error("An unexpected error occurred"));
+    }
+}
