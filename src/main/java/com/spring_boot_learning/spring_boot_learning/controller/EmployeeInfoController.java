@@ -32,26 +32,29 @@ public class EmployeeInfoController {
 
     @Operation(summary = "Update employee by ID")
     @PutMapping("/{id}")
-    public EmployeeInfoResponse updateEmployeeById(
+    public ResponseEntity<APIResponse<EmployeeInfoResponse>> updateEmployeeById(
             @Parameter(description = "Employee Id", required = true, example = "1")
             @PathVariable("id") Long id,
             @Valid @RequestBody EmployeeInfoRequest request){
 
-        return employeeInfoService.updateEmployeeById(id,request);
+        var updatedEmployee = employeeInfoService.updateEmployeeById(id,request);
+        return ResponseEntity.status(HttpStatus.OK).body(APIResponse.success("Employee data updated successfully.", updatedEmployee));
     }
 
     @GetMapping("{id}")
-    public EmployeeInfoResponse getEmployeeById(
+    public ResponseEntity<APIResponse<EmployeeInfoResponse>> getEmployeeById(
             @Parameter(description = "Employee Id", required = true, example = "1")
             @PathVariable Long id){
 
-        return employeeInfoService.getEmployeeById(id);
+        var existingEmployee = employeeInfoService.getEmployeeById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(APIResponse.success("Required employee found", existingEmployee));
     }
 
     @GetMapping
-    public List<EmployeeInfoResponse> getAllEmployees(){
+    public ResponseEntity<APIResponse<List<EmployeeInfoResponse>>> getAllEmployees(){
 
-        return employeeInfoService.findAll();
+        var employeesList =  employeeInfoService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(APIResponse.success("List of all employees", employeesList));
     }
 
 }

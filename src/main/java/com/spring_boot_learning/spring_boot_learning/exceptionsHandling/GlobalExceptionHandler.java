@@ -13,7 +13,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@RestControllerAdvice
+@RestControllerAdvice // A shortcut annotation that combines @ControllerAdvice with @ResponseBody,
+// in effect simply an @ControllerAdvice whose exception handler methods render to the response body.
+//By default, @RestControllerAdvice applies to any controller, including @Controller and @RestController.
+// Use attributes of the annotation to apply more specific filtering criteria.
+
 public class GlobalExceptionHandler {
 
     // ✅ Validation Errors (DTO validation)
