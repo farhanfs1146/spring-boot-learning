@@ -6,7 +6,7 @@ import com.spring_boot_learning.spring_boot_learning.service.EmployeeInfoService
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employee-info")
 @Tag(name="Employee Info", description="Employee info relevant APIs.")
-@AllArgsConstructor
-public class EmployeeInfo {
+@RequiredArgsConstructor
+public class EmployeeInfoController {
 
-    private EmployeeInfoService employeeInfoService;
+    private final EmployeeInfoService employeeInfoService;
 
     @PostMapping
     public EmployeeInfoResponse createEmployee(@Valid @RequestBody EmployeeInfoRequest request){
