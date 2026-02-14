@@ -63,6 +63,6 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
     private EmployeeInfoResponse mapResponse(EmployeeInfo savedEmployee) {
 
-        return new EmployeeInfoResponse(savedEmployee.getId(), savedEmployee.getCardNo(), savedEmployee.getEmployeeName(), savedEmployee.getFatherName(), savedEmployee.getContactNo(), savedEmployee.getEmployeeType().name(), savedEmployee.getIsActive());
+        return new EmployeeInfoResponse(savedEmployee.getId(), savedEmployee.getCardNo(), savedEmployee.getEmployeeName(), savedEmployee.getFatherName(), savedEmployee.getContactNo(), savedEmployee.getEmployeeType(), savedEmployee.getIsActive());
     }
 }
