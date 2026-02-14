@@ -1,5 +1,6 @@
 package com.spring_boot_learning.spring_boot_learning.entity;
 
+import com.spring_boot_learning.spring_boot_learning.enums.EmployeeType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,11 @@ public class EmployeeInfo {
 
     @Column(name = "contact_no", nullable = false, length = 15)
     private String contactNo;
+
+    // Learn how to use enum field in our entity.
+    @Enumerated(EnumType.STRING)
+    @Column(name = "employee_type", nullable = false, length = 50)
+    private EmployeeType employeeType;
 
     @Column(name = "is_active", nullable = false) // Database level constraint
     private Boolean isActive = true; // set default Java-Base Level default.

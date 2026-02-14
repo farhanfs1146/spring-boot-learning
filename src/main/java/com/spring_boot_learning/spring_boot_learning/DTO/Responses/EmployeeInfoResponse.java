@@ -1,5 +1,6 @@
 package com.spring_boot_learning.spring_boot_learning.DTO.Responses;
 
+import com.spring_boot_learning.spring_boot_learning.enums.EmployeeType;
 import lombok.*;
 
 @NoArgsConstructor
@@ -19,6 +20,8 @@ public class EmployeeInfoResponse {
     private String fatherName;
 
     private String contactNo;
+
+    private EmployeeType employeeType;
 
     private Boolean isActive;
 
