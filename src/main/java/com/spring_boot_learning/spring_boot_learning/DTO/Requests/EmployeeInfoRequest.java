@@ -1,5 +1,6 @@
 package com.spring_boot_learning.spring_boot_learning.DTO.Requests;
 
+import com.spring_boot_learning.spring_boot_learning.enums.EmployeeType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -33,6 +34,10 @@ public class EmployeeInfoRequest {
     @Size(min = 11, max = 15)
     @Schema(description = "Employee contact must be provided", example = "0323566886")
     private String contactNo;
+
+    @NotNull(message = "Employee type can not be empty or invalid.")
+    @Schema(description = "Employee Type", example = "LABOUR")
+    private EmployeeType employeeType;
 
     @Schema(description = "Employee status must be provided.", example = "true")
     private Boolean isActive;

@@ -20,6 +20,8 @@ public class EmployeeInfoResponse {
 
     private String contactNo;
 
+    private String employeeType;
+
     private Boolean isActive;
 
 }

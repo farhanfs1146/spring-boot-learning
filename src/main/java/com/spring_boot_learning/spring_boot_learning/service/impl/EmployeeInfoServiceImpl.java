@@ -3,6 +3,7 @@ package com.spring_boot_learning.spring_boot_learning.service.impl;
 import com.spring_boot_learning.spring_boot_learning.DTO.Requests.EmployeeInfoRequest;
 import com.spring_boot_learning.spring_boot_learning.DTO.Responses.EmployeeInfoResponse;
 import com.spring_boot_learning.spring_boot_learning.entity.EmployeeInfo;
+import com.spring_boot_learning.spring_boot_learning.enums.EmployeeType;
 import com.spring_boot_learning.spring_boot_learning.repository.EmployeeInfoRepository;
 import com.spring_boot_learning.spring_boot_learning.service.EmployeeInfoService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
         // if not exist save it as new.
         EmployeeInfo employeeInfo = EmployeeInfo.builder()
                 .cardNo(request.getCardNo())
+                .employeeType(request.getEmployeeType()) // Enum → Enum
                 .employeeName(request.getEmployeeName())
                 .fatherName(request.getFatherName())
                 .contactNo(request.getContactNo())
@@ -36,7 +38,6 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
         var savedEmployee = employeeInfoRepository.save(employeeInfo);
         return mapResponse(savedEmployee);
     }
-
 
     @Override
     public EmployeeInfoResponse updateEmployeeById(Long id, EmployeeInfoRequest request) {
@@ -62,6 +63,6 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
     private EmployeeInfoResponse mapResponse(EmployeeInfo savedEmployee) {
 
-        return new EmployeeInfoResponse(savedEmployee.getId(), savedEmployee.getCardNo(), savedEmployee.getEmployeeName(), savedEmployee.getFatherName(), savedEmployee.getContactNo(), savedEmployee.getIsActive());
+        return new EmployeeInfoResponse(savedEmployee.getId(), savedEmployee.getCardNo(), savedEmployee.getEmployeeName(), savedEmployee.getFatherName(), savedEmployee.getContactNo(), savedEmployee.getEmployeeType().name(), savedEmployee.getIsActive());
     }
 }
